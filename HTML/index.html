@@ -17,11 +17,11 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
                 <div class="boxbig">
                     <div class="first">
                         <div class="first-line">
-                            <p>2025</p>
+                            <p></p>
                             <span class="material-symbols-outlined" style="color: #e5d1a6;">arrow_shape_up</span>
                         </div>
                         <div class="second-line">
-                            <p>2026</p>
+                            <p></p>
                         </div>
                     </div>
                     <div class="second">
@@ -45,7 +45,7 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
                         <p>Renda Mensal</p>
                     </div>
                     <div class="second">
-                        <p>R$ 3.200,00</p>
+                        <p id="rendaMensal"></p>
                     </div>
                 </div>
                 <div class="box">
@@ -54,7 +54,7 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
                         <p>Despesa Mensal</p>
                     </div>
                     <div class="second">
-                        <p>R$ 3.200,00</p>
+                        <p id="despesaMensal"></p>
                     </div>
                 </div>
                 <div class="box-first-one">
@@ -63,7 +63,7 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
                         <p>Saldo Atual</p>
                     </div>
                     <div class="second">
-                        <p>R$ 3.200,00</p>
+                        <p id="saldoAtual"></p>
                     </div>
                 </div>
             </div>
@@ -128,45 +128,13 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
                         <div class="columns">
                             <div class="first-column">
                                 <h1>Despesas</h1>
-                                <div class="cards">
-                                    <div class="card">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor">R$3.200,00</p>
-                                    </div>
-                                    <div class="card">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor">R$3.200,00</p>
-                                    </div>
-                                    <div class="card">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor">R$3.200,00</p>
-                                    </div>
-                                    <div class="card" style="border: none;">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor">R$3.200,00</p>
-                                    </div>
+                                <div class="cards" id="cardsDespesas">
                                 </div>
                                 <button>Visualizar Todos</button>
                             </div>
                             <div class="first-column">
                                 <h1>Rendas</h1>
-                                <div class="cards">
-                                    <div class="card">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor" id="p-renda">R$3.200,00</p>
-                                    </div>
-                                    <div class="card">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor" id="p-renda">R$3.200,00</p>
-                                    </div>
-                                    <div class="card">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor" id="p-renda">R$3.200,00</p>
-                                    </div>
-                                    <div class="card" style="border: none;">
-                                        <p class="motivo">Faculdade</p>
-                                        <p class="valor" id="p-renda">R$3.200,00</p>
-                                    </div>
+                                <div class="cards" id="cardsRendas">
                                 </div>
                                 <button>Visualizar Todos</button>
                             </div>
@@ -180,10 +148,10 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
                 <div class="boxbig">
                     <div class="user">
                         <div class="icon">
-                            <p>GS</p>
+                            <p id="usuarioIcon"></p>
                         </div>
                         <div class="name">
-                            <p class="first-name">Guilherme Silva</p>
+                            <p class="first-name" id="usuarioName"></p>
                             <p class="second-name">Planejador Financeiro</p>
                         </div>
                     </div>
@@ -203,9 +171,8 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wg
             </div>
         </section>
     </div>
+    <script src="../JS/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../JS/charts/barras.js"></script>
-    <script src="../JS/charts/percentual.js"></script>
     <script src="../JS/charts/categorias.js"></script>
 </body>
 </html>
