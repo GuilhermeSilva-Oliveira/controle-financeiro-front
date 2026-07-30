@@ -473,11 +473,13 @@ section.third-line .container .boxbig .cards .icon{
     width: 33%;
     background-color: var(--background-box);
     border: 1px solid color-mix(in srgb, var(--gold-border) 15%, transparent);
+    cursor: pointer;
 }
 
 section.third-line .container .boxbig .cards .icon span{
     transform: scale(1.6);
     color: var(--gold-border);
+    cursor: pointer;
 }
 
 section.third-line .container .boxbig .cards .icon:hover{

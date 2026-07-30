@@ -5,7 +5,7 @@ const optionsCategorias = {
 
     chart: {
         type: "bar",
-        height: 300,
+        height: 280,
         background: "transparent",
         toolbar: {
             show: false
