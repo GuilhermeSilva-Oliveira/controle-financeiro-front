@@ -4,14 +4,16 @@ window.onload = async function () {
         buscarDespesa(),
         buscarSaldo(),
         buscarRendas(),
-        buscarDespesas()
+        buscarDespesas(),
+        buscarMotivos()
     ]);
 
     preencherRendas();
     preencherDespesas();
+    preencherMotivos();
 
     gerarGraficoBarras(renda, despesa, saldo);
-    gerarGraficoPizza(despesa, saldo);
+    gerarGraficoPizza(despesa, renda);
 
     destacarMesesPassados();
     preencherAnos();
@@ -195,17 +197,39 @@ async function buscarDespesas() {
     }
 }
 
+// ============= BUSCAR LISTA MOTIVOS =============
+let listaMotivos = [];
+
+async function buscarMotivos() {
+    try {
+        const response = await fetch("http://localhost:8081/v1/frontend/lista/controle/motivo");
+
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+
+        listaMotivos = await response.json();
+        console.log(listaMotivos);
+        return listaMotivos;
+
+    } catch (erro) {
+        console.error("Erro ao buscar lista de despesas:", erro);
+        listaMotivos = [];
+        return [];
+    }
+}
+
 // ============= PREENCHIMENTO DE CARDS =============
 function preencherRendas() {
     const container = document.getElementById("cardsRendas");
     container.innerHTML = "";
 
-    listaRendas.forEach((registro, index) => {
+    listaRendas.slice(0, 5).forEach((registro, index, array) => {
 
         const card = document.createElement("div");
         card.className = "card";
 
-        if (index === listaRendas.length - 1) {
+        if (index === array.length - 1) {
             card.style.border = "none";
         }
 
@@ -213,9 +237,9 @@ function preencherRendas() {
             <p class="motivo">${registro.motivo}</p>
             <p class="valor" id="p-renda">
                 ${registro.valor.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                })}
+            style: "currency",
+            currency: "BRL"
+        })}
             </p>
         `;
 
@@ -227,22 +251,22 @@ function preencherDespesas() {
     const container = document.getElementById("cardsDespesas");
     container.innerHTML = "";
 
-    listaDespesas.forEach((registro, index) => {
+    listaDespesas.slice(0, 5).forEach((registro, index, array) => {
 
         const card = document.createElement("div");
         card.className = "card";
 
-        if (index === listaDespesas.length - 1) {
-            card.style.border = "none";
+        if (index === array.length - 1) {
+            card.style.borderBottom = "none";
         }
 
         card.innerHTML = `
             <p class="motivo">${registro.motivo}</p>
             <p class="valor" id="p-despesa">
                 ${registro.valor.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                })}
+            style: "currency",
+            currency: "BRL"
+        })}
             </p>
         `;
 
@@ -437,5 +461,96 @@ function gerarGraficoPizza(despesa, saldo) {
     new ApexCharts(
         document.querySelector("#graficoPercentual"),
         optionsRadial
+    ).render();
+}
+
+// ============= GRÁFICO DE MOTIVOS =============
+function preencherMotivos() {
+
+    const optionsCategorias = {
+
+        series: [{
+            name: "",
+            data: listaMotivos.map(item => item.valor)
+        }],
+
+        chart: {
+            type: "bar",
+            height: 280,
+            background: "transparent",
+            toolbar: {
+                show: false
+            }
+        },
+
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                distributed: true,
+                barHeight: "55%"
+            }
+        },
+
+        colors: listaMotivos.map(() => "#E9D4A0"),
+
+        dataLabels: {
+            enabled: false
+        },
+
+        xaxis: {
+            categories: listaMotivos.map(item => item.motivo),
+
+            labels: {
+                show: false
+            },
+
+            axisBorder: {
+                show: false
+            },
+
+            axisTicks: {
+                show: false
+            }
+        },
+
+        yaxis: {
+            labels: {
+                align: "left",
+                offsetX: -15,
+                offsetY: 4,
+
+                style: {
+                    colors: "#E9D4A0",
+                    fontSize: "15px",
+                    fontFamily: "Poppins"
+                }
+            }
+        },
+
+        grid: {
+            show: false
+        },
+
+        legend: {
+            show: false
+        },
+
+        tooltip: {
+            enabled: true,
+
+            y: {
+                formatter: function (valor) {
+                    return valor.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    });
+                }
+            }
+        }
+    };
+
+    new ApexCharts(
+        document.querySelector("#graficoCategorias"),
+        optionsCategorias
     ).render();
 }

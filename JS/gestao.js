@@ -220,10 +220,14 @@ function preencherMovimentacoes() {
     // Remove todos os cards existentes
     container.querySelectorAll(".card").forEach(card => card.remove());
 
-    listaMovimentacoes.forEach((registro) => {
+    listaMovimentacoes.forEach((registro, index, array) => {
 
         const card = document.createElement("div");
         card.className = "card";
+
+        if (index === array.length - 1) {
+            card.style.borderBottom = "none";
+        }
 
         const data = new Date(registro.dataMovimentacao).toLocaleDateString("pt-BR");
 
@@ -262,11 +266,10 @@ function preencherMovimentacoes() {
             </div>
         `;
 
-        // Adiciona o card antes do botão
         container.insertBefore(card, container.querySelector("button"));
     });
-
 }
+
 function preencherRendas() {
 
     const container = document.getElementById("colunaRendas");
@@ -341,7 +344,7 @@ function preencherDespesas() {
         card.innerHTML = `
             <div class="colunas">
 
-                <div class="coluna">
+                <div class="coluna desc">
                     <p class="header">Descrição</p>
                     <p class="text-content">${registro.descricao}</p>
                 </div>
